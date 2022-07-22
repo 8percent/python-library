@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "python-library"
+version = "0.1.0"
+description = "Provide base template for python library"
+authors = ["JaeyoungHeo <jay.jaeyoung@gmail.com>"]
+maintainers = ["JaeyoungHeo <jay.jaeyoung@gmail.com>"]
+readme = 'README.md'
+repository = "https://github.com/8percent/python-library"
+packages = [
+    { include = "python_library", from = "src" },
+]
+
+[tool.poetry.dependencies]
+python = "~3.10"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.1.2"
+isort = "^5.10.1"
+tox = "^3.25.1"
+flake8 = "^4.0.1"
+pytest-cov = "^3.0.0"
+codecov = "^2.1.12"
+black = "^22.6.0"
+pre-commit = "^2.19.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+# Lint Configurations
+[tool.isort]
+force_single_line = "True"
+sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
+
+[tool.black]
+preview = "True"
+line-length = "79"
+target-version = ['py310']
+skip-string-normalization = "True"
+
+[tool.pytest.ini_options]
+addopts = "-p no:cacheprovider"
+pythonpath = [
+    ".",
+    "src",
+]
+testpaths = [
+    "tests",
+]

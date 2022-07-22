@@ -1,4 +1,4 @@
-name: Continuous Integration
+name: Build & Test
 
 on: [push]
 
@@ -7,17 +7,29 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10"]
+        python-version: ["3.9", "3.10"]
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout Project Package
+        uses: actions/checkout@v3
+
       - name: Setup Python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
+
       - name: Install Poetry
         uses: snok/install-poetry@v1
+
       - name: Install tox
         run: pip install tox tox-gh-actions
+
       - name: Test
         run: poetry run tox
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v3
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          fail_ci_if_error: true
+          verbose: true

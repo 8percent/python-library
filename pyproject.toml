@@ -42,7 +42,7 @@ skip-string-normalization = "True"
 addopts = "-p no:cacheprovider"
 pythonpath = [
     ".",
-#    "src",
+#    "src",  # no-data-collecting
 ]
 testpaths = [
     "tests",

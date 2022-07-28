@@ -40,10 +40,10 @@ skip-string-normalization = "True"
 
 [tool.pytest.ini_options]
 addopts = "-p no:cacheprovider"
-#pythonpath = [
-#    ".",
+pythonpath = [
+    ".",
 #    "src",  # no-data-collecting
-#]
+]
 testpaths = [
     "tests",
 ]

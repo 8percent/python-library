@@ -26,11 +26,3 @@ jobs:
 
       - name: Test
         run: poetry run tox
-
-      - name: Upload coverage to Codecov
-        if: ${{ matrix.python-version == '3.10' }}
-        uses: codecov/codecov-action@v3
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          fail_ci_if_error: true
-          verbose: true

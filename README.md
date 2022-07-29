@@ -14,36 +14,36 @@ This repository is a [template repository](https://docs.github.com/en/repositori
 
 ## Goals
 - Fast project setup
-- Reduce repeated task
-- Make developer to concentrate on writing library's core function
+- Remove repeated, boring tasks
 
 ## Usage
-### Github
-- Press `Use this template` button. on top right repos code section
+- GitHub `Use this template` button
+- Clone this repository
 
-### Clone
-- Clone this repository using following command
-  - `git clone https://github.com/8percent/python-library.git`
+- 사용법에 대한 설명
 
 ## Architecture
 
 ### Project Layout
-- We use src layout
+- This template repository follows src layout style
+- Main package is reside in src directory
+- Tests are separated from main package. All test related modules should be in 'tests' python package located at project root
+
+#### Reference
+- https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure
 - https://doc.pytest.org/en/latest/explanation/goodpractices.html#tests-outside-application-code
 
 ### Linting
-- github workflow
+- GitHub workflow
 - pre-commit
   - flake8, isort, black
 
 ### Testing
-- tox
-  - test-matrix
-  - default 3.9, 3.10
-
-- pytest
-- poetry install ( 현재 프로젝트의 패키지 설치 - 현재 로컬의 프로젝트를 연결해줌)
-- tox -e dev ( 패키지 만들고 테스트 )
+- ci
+  - tox: 패키지 빌드한것에 대한 테스트 수행
+    - 3.9, 3.10 등 여러개의 matrix 를 지정
+  - lint: 코드 린트
+  - test: 저장소 코드의 테스트 및 커버리지
 
 ### Coverage
 - codecov
@@ -61,18 +61,3 @@ This repository is a [template repository](https://docs.github.com/en/repositori
 - 템플릿은 지속적으로 발전할 수 있다.
 - Semantic Versining 을 활용한다.
 - 프로젝트 구조가 변경되는 경우 major 버전을 변경해야하며, 일부 기능의 수정 변경은 minor, 이외 작은 코드의 개선은 patch 로 한다.
-
-
-
-### TESTING
-
-- poetry install 을 하면 로컬의 프로젝트 Path 가 지정됨
-  - pytest 수행시 로컬 프로젝트 변경을 잘 반영함
-  - tox 수행시 dist 에 현재 프로젝트 변경사항을 기반으로 패키징을 함
-
-- 로컬 개발시
-  - poetry install을 해두면 pytest 를 활용할 수 있다. ( CLI, IDE )
-  - tox -e dev 를 통해 패키징한 결과를 테스트할 수 있다.
-
-- CI
-  - poetry install 을 통해 패키징 결과를 테스트 할 수 있다.

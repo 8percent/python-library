@@ -3,7 +3,7 @@ name: Build
 on: [push]
 
 jobs:
-  build:
+  package-build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -27,7 +27,7 @@ jobs:
       - name: Test
         run: poetry run tox
 
-  test:
+  unittest:
     runs-on: ubuntu-latest
     strategy:
       matrix:

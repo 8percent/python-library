@@ -145,11 +145,3 @@ GitHub actions `ci.yml` workflow's unittest job is control coverage report.
 We suggest to install Codecov GitHub App which can manage coverage of repository.
 
 ---
-
-## Contributing
-- guideline
-
-### Versioning
-- 템플릿은 지속적으로 발전할 수 있다.
-- Semantic Versining 을 활용한다.
-- 프로젝트 구조가 변경되는 경우 major 버전을 변경해야하며, 일부 기능의 수정 변경은 minor, 이외 작은 코드의 개선은 patch 로 한다.

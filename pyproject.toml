@@ -4,8 +4,9 @@ version = "0.1.0"
 description = "Provide base template for python library"
 authors = ["JaeyoungHeo <jay.jaeyoung@gmail.com>"]
 maintainers = ["JaeyoungHeo <jay.jaeyoung@gmail.com>"]
-readme = 'README.md'
+readme = "README.md"
 repository = "https://github.com/8percent/python-library"
+license = "MIT"
 packages = [
     { include = "python_library", from = "src" },
 ]
@@ -40,10 +41,6 @@ skip-string-normalization = "True"
 
 [tool.pytest.ini_options]
 addopts = "-p no:cacheprovider"
-pythonpath = [
-    ".",
-    "src",
-]
 testpaths = [
     "tests",
 ]

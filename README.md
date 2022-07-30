@@ -149,9 +149,6 @@ We suggest to install Codecov GitHub App which can manage coverage of repository
 ## Contributing
 - guideline
 
-### Release
-- release drafter
-
 ### Versioning
 - 템플릿은 지속적으로 발전할 수 있다.
 - Semantic Versining 을 활용한다.

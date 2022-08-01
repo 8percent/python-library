@@ -48,6 +48,15 @@ jobs:
     - name: Install Dependencies
       run: poetry install --no-root -v
 
+    - name: print path
+      run: poetry run path.py
+
+    - name: Set PythoPath
+      run: echo "PYTHONPATH=home/runner/work/python-library" >> $GITHUB_ENV
+
+    - name: print path
+      run: poetry run path.py
+
     - name: Test
       run: poetry run pytest tests/ --cov=src/ --cov-report=xml
 

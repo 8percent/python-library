@@ -46,7 +46,10 @@ jobs:
       uses: snok/install-poetry@v1
 
     - name: Install Dependencies
-      run: poetry install -v
+      run: poetry install --no-root -v
+
+    - name: Set Python Path
+      run: echo "PYTHONPATH=src" >> $GITHUB_ENV
 
     - name: Test
       run: poetry run pytest tests/ --cov=src/ --cov-report=xml

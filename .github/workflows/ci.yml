@@ -46,7 +46,7 @@ jobs:
       uses: snok/install-poetry@v1
 
     - name: Install Dependencies
-      run: poetry install -v
+      run: poetry install --no-root -v
 
     - name: Test
       run: poetry run pytest tests/ --cov=src/ --cov-report=xml

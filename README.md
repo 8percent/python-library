@@ -117,7 +117,7 @@ Detailed explanation about stacks used in this template is covered in this secti
 This template repository follows src layout style. As the name suggests, its distinctive feature is subdirectory named `src`.
 Main python packages lives inside `src` directory.
 
-To tests python package strictly. Testing should be done against built package. not from the source code itself.
+To tests python built package. Testing should be done against built package. not from the source code itself.
 Src layout helps to achieve this condition. By separating source code from project root, It prevents test code to import source code.
 
 This layout is better explained in this [blog post by Ionel Cristian Mărieș](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure).
@@ -147,13 +147,13 @@ It demonstrates how draft should be presented.
 [Pytest](https://github.com/pytest-dev/pytest/) is our main test runner.
 
 ### Linting
-Code is double-checked while development process. One at commit time, and the other at CI process.
+Code is double-checked during development process. One at commit phase, and the other at CI process.
 
 [pre-commit](https://pre-commit.com/) is help us to check at commit time. By executing installation command `pre-commit install`,
 It automatically adds pre commit hooks. Types of hook are managed using `.pre-commit-config.yaml`.
 
 ### Coverage
-Coverage of test functions is one of important metrics deciding code quality.
+Coverage of test functions is one of important metrics which decides code quality.
 GitHub actions `ci.yml` workflow's unittest job is control coverage report.
 
 We suggest to install Codecov GitHub App which can manage coverage of repository.

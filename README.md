@@ -46,12 +46,18 @@ This will resolve package dependencies and install it in poetry managed virtual 
 $ poetry install
 ```
 
+### (Optional) Install Pyenv
+> pyenv lets you easily switch between multiple versions of Python.
+It's simple, unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing well.
+
+As quoted pyenv readme demonstrates, It provide us handy python version management.
+
 ### Configuration
 
 #### pyproject.toml
 This file contains build system requirements and information, which are used by poetry to build the package.
 We tried to gather every package related settings as much as possible here.
-Through this design decision, project could keep configuration files as little as possible.
+Through this design decision, project could remove package dependant configuration files like `.isort.cfg`, `pytest.ini`, etc.
 
 - **[tool.poetry]**: Describe package's metadata. Including package name, versions, dscription, authors etc.
 - **[tool.poetry.dependencies]**, **[tool.poetry.dev-dependencies]**: Manage package's dependencies. Poetry will check this section to resolve requirements version.
@@ -59,17 +65,17 @@ Through this design decision, project could keep configuration files as little a
 - **[tool.isort]**, **[tool.black]**: By Editing this part, you can set how linting library should work.
 - **[tool.pytest.ini_options]**: pytest configuration.
 
-We suggest edit every setting above to represent your project better except **[build-system]**.
+Except **[build-system]**, We suggest you to update every settings above.
 
 #### .github/workflows/ci.yml
-We choose GitHub action as Continuous Integration tool. It consists package-build, unittest, and lint.
-Each jobs works concurrently at different virtual machines.
+We choose GitHub action as Continuous Integration tool. It contains package-build, unittest, and lint job.
+Each job works concurrently on different virtual machines.
 
-- **package-build**: Utilizes tox to test package against multiple python versions.
+- **package-build**: Use tox to test package against multiple python versions.
 - **unittest**: Test code and report coverage using pytest and codecov.
 - **lint**: Lint code using flake, isort, black.
 
-Change `python-version` value in this file according to package compatible python versions. Versions should be same as pyproject.toml.
+Change `python-version` value in this file according to package compatible python versions which configured at `pyproject.toml`.
 
 #### tox.ini
 Tox runs test against packages which built in isolated virtual environment.
@@ -83,7 +89,7 @@ According to package's python compatible versions, **[tox.envlist]** and **[gh-a
 #### Source code
 Make your own named package in src directory.
 
-NOTE: package setting in pyproject.toml should be changed as you create your own package.
+**NOTE**: package setting in `pyproject.toml` should be changed as you set up your own package.
 ```
 packages = [
     { include = "{your-python-package-name}", from = "src" },
@@ -91,9 +97,9 @@ packages = [
 ```
 
 #### Test Code
-Every test code should reside in `tests` package at project root.
+Every test code should resides in `tests` package at project root.
 
-Test your code in local machine. you can just simply use 'pytest' or 'tox'.
+To test your source code, simply use 'pytest' or 'tox'.
 ```
 # Use pytest
 $ pytest tests/
@@ -111,7 +117,7 @@ Detailed explanation about stacks used in this template is covered in this secti
 This template repository follows src layout style. As the name suggests, its distinctive feature is subdirectory named `src`.
 Main python packages lives inside `src` directory.
 
-To tests python package strictly. Testing should be done against built package. not from the source code itself.
+To tests python built package. Testing should be done against built package. not from the source code itself.
 Src layout helps to achieve this condition. By separating source code from project root, It prevents test code to import source code.
 
 This layout is better explained in this [blog post by Ionel Cristian Mărieș](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure).
@@ -141,13 +147,13 @@ It demonstrates how draft should be presented.
 [Pytest](https://github.com/pytest-dev/pytest/) is our main test runner.
 
 ### Linting
-Code is double-checked while development process. One at commit time, and the other at CI process.
+Code is double-checked during development process. One at commit phase, and the other at CI process.
 
 [pre-commit](https://pre-commit.com/) is help us to check at commit time. By executing installation command `pre-commit install`,
 It automatically adds pre commit hooks. Types of hook are managed using `.pre-commit-config.yaml`.
 
 ### Coverage
-Coverage of test functions is one of important metrics deciding code quality.
+Coverage of test functions is one of important metrics which decides code quality.
 GitHub actions `ci.yml` workflow's unittest job is control coverage report.
 
 We suggest to install Codecov GitHub App which can manage coverage of repository.

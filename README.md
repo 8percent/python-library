@@ -46,6 +46,12 @@ This will resolve package dependencies and install it in poetry managed virtual 
 $ poetry install
 ```
 
+### (Optional) Install Pyenv
+> pyenv lets you easily switch between multiple versions of Python.
+It's simple, unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing well.
+
+As quoted pyenv readme demonstrates, It provide us handy python version management.
+
 ### Configuration
 
 #### pyproject.toml

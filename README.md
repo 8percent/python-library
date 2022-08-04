@@ -57,7 +57,7 @@ As quoted pyenv readme demonstrates, It provide us handy python version manageme
 #### pyproject.toml
 This file contains build system requirements and information, which are used by poetry to build the package.
 We tried to gather every package related settings as much as possible here.
-Through this design decision, project could keep configuration files as little as possible.
+Through this design decision, project could remove package dependant configuration files like `.isort.cfg`, `pytest.ini`, etc.
 
 - **[tool.poetry]**: Describe package's metadata. Including package name, versions, dscription, authors etc.
 - **[tool.poetry.dependencies]**, **[tool.poetry.dev-dependencies]**: Manage package's dependencies. Poetry will check this section to resolve requirements version.
@@ -65,17 +65,17 @@ Through this design decision, project could keep configuration files as little a
 - **[tool.isort]**, **[tool.black]**: By Editing this part, you can set how linting library should work.
 - **[tool.pytest.ini_options]**: pytest configuration.
 
-We suggest edit every setting above to represent your project better except **[build-system]**.
+Except **[build-system]**, We suggest you to update every settings above.
 
 #### .github/workflows/ci.yml
-We choose GitHub action as Continuous Integration tool. It consists package-build, unittest, and lint.
-Each jobs works concurrently at different virtual machines.
+We choose GitHub action as Continuous Integration tool. It contains package-build, unittest, and lint job.
+Each job works concurrently on different virtual machines.
 
-- **package-build**: Utilizes tox to test package against multiple python versions.
+- **package-build**: Use tox to test package against multiple python versions.
 - **unittest**: Test code and report coverage using pytest and codecov.
 - **lint**: Lint code using flake, isort, black.
 
-Change `python-version` value in this file according to package compatible python versions. Versions should be same as pyproject.toml.
+Change `python-version` value in this file according to package compatible python versions which configured at `pyproject.toml`.
 
 #### tox.ini
 Tox runs test against packages which built in isolated virtual environment.
@@ -89,7 +89,7 @@ According to package's python compatible versions, **[tox.envlist]** and **[gh-a
 #### Source code
 Make your own named package in src directory.
 
-NOTE: package setting in pyproject.toml should be changed as you create your own package.
+**NOTE**: package setting in `pyproject.toml` should be changed as you set up your own package.
 ```
 packages = [
     { include = "{your-python-package-name}", from = "src" },
@@ -97,9 +97,9 @@ packages = [
 ```
 
 #### Test Code
-Every test code should reside in `tests` package at project root.
+Every test code should resides in `tests` package at project root.
 
-Test your code in local machine. you can just simply use 'pytest' or 'tox'.
+To test your source code, simply use 'pytest' or 'tox'.
 ```
 # Use pytest
 $ pytest tests/

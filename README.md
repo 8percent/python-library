@@ -38,7 +38,7 @@ Subsequent Installation step might be helpful.
 ## Installation
 
 ### Install Poetry
-Please read this [installation guide](https://github.com/pyenv/pyenv#installation) to install poetry.
+Please read this [installation guide](https://python-poetry.org/docs/) to install poetry.
 
 Then install package dependencies with this command at project root.
 This will resolve package dependencies and install it in poetry managed virtual environment.
@@ -50,7 +50,7 @@ $ poetry install
 > pyenv lets you easily switch between multiple versions of Python.
 It's simple, unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing well.
 
-As quoted pyenv readme demonstrates, It provide us handy python version management.
+As quoted [pyenv readme](https://github.com/pyenv/pyenv/blob/master/README.md) demonstrates, It provide us handy python version management.
 
 ### Configuration
 

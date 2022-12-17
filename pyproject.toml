@@ -31,6 +31,8 @@ build-backend = "poetry.core.masonry.api"
 # Lint Configurations
 [tool.isort]
 force_single_line = "True"
+profile = "black"
+line_length = "79"
 sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
 
 [tool.black]

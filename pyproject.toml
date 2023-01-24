@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-library"
-version = "1.0.0"
+version = "1.0.3"
 description = "Provide base template for python library"
 authors = ["JaeyoungHeo <jay.jaeyoung@gmail.com>"]
 maintainers = ["JaeyoungHeo <jay.jaeyoung@gmail.com>"]

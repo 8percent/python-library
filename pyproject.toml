@@ -33,7 +33,7 @@ build-backend = "poetry.core.masonry.api"
 profile = "black"
 
 [tool.black]
-preview = "True"
+preview = true
 target-version = ['py39', 'py310', 'py311']
 
 [tool.pytest.ini_options]

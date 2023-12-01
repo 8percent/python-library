@@ -31,9 +31,11 @@ build-backend = "poetry.core.masonry.api"
 # Lint Configurations
 [tool.isort]
 profile = "black"
+line_length = 88
 
 [tool.black]
 preview = true
+line-length = 88
 target-version = ['py39', 'py310', 'py311']
 
 [tool.pytest.ini_options]

@@ -30,9 +30,7 @@ build-backend = "poetry.core.masonry.api"
 
 # Lint Configurations
 [tool.isort]
-force_single_line = "True"
 profile = "black"
-sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
 
 [tool.black]
 preview = "True"

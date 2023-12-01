@@ -39,7 +39,6 @@ sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
 preview = "True"
 line-length = "79"
 target-version = ['py39', 'py310', 'py311']
-skip-string-normalization = "True"
 
 [tool.pytest.ini_options]
 addopts = "-p no:cacheprovider"

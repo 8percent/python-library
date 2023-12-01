@@ -32,12 +32,10 @@ build-backend = "poetry.core.masonry.api"
 [tool.isort]
 force_single_line = "True"
 profile = "black"
-line_length = "79"
 sections = ["FUTURE", "STDLIB", "THIRDPARTY", "FIRSTPARTY", "LOCALFOLDER"]
 
 [tool.black]
 preview = "True"
-line-length = "79"
 target-version = ['py39', 'py310', 'py311']
 
 [tool.pytest.ini_options]

@@ -155,9 +155,8 @@ It automatically adds pre commit hooks. Types of hook are managed using `.pre-co
 
 ### Coverage
 Coverage of test functions is one of important metrics which decides code quality.
-GitHub actions `ci.yml` workflow's unittest job is control coverage report.
-
-We suggest to install Codecov GitHub App which can manage coverage of repository.
+`ci.yml` workflow runs unittest and reports coverage report on pull request comment.
+We use [orgoros's github action](https://github.com/orgoro/coverage) as our coverage component of our CI workflow.
 
 ---
 

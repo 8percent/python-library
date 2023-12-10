@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.9", "3.10", "3.11"]
+        python-version: ["3.10", "3.11"]
 
     steps:
       - name: Checkout Project Package
@@ -52,14 +52,13 @@ jobs:
       run: echo "PYTHONPATH=src" >> $GITHUB_ENV
 
     - name: Test
-      run: poetry run pytest tests/ --cov=src/ --cov-report=xml
+      run: poetry run pytest tests/ --cov=src/ --cov-report xml:coverage.xml
 
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
+    - name: Report Coverage
+      uses: orgoro/coverage@v3.1
       with:
-        token: ${{ secrets.CODECOV_TOKEN }}
-        fail_ci_if_error: true
-        verbose: true
+        coverageFile: coverage.xml
+        token: ${{ secrets.GITHUB_TOKEN }}
 
   lint:
     runs-on: ubuntu-latest

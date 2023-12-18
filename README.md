@@ -1,7 +1,6 @@
 # Python Library
 
 ![Build](https://github.com/8percent/python-library/actions/workflows/ci.yml/badge.svg)
-[![codecov](https://codecov.io/gh/8percent/python-library/branch/master/graph/badge.svg?token=J7S8RQ32Y0)](https://codecov.io/gh/8percent/python-library)
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/8percent/python-library/master.svg)](https://results.pre-commit.ci/latest/github/8percent/python-library/master)
@@ -73,7 +72,7 @@ We choose GitHub action as Continuous Integration tool. It contains package-buil
 Each job works concurrently on different virtual machines.
 
 - **package-build**: Use tox to test package against multiple python versions.
-- **unittest**: Test code and report coverage using pytest and codecov.
+- **unittest**: Test code and report coverage using pytest.
 - **lint**: Lint code using flake, isort, black.
 
 Change `python-version` value in this file according to package compatible python versions which configured at `pyproject.toml`.

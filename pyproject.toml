@@ -20,7 +20,6 @@ isort = "^5.12.0"
 tox = "^4.3.5"
 flake8 = "^6.0.0"
 pytest-cov = "^4.0.0"
-codecov = "^2.1.12"
 black = "^23.11.0"
 pre-commit = "^3.6.0"
 

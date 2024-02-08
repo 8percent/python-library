@@ -5,12 +5,12 @@
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/8percent/python-library/master.svg)](https://results.pre-commit.ci/latest/github/8percent/python-library/master)
 
-
 This repository is a [template repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template) providing boilerplate for Python library.
 
 Developer can start writing code without wasting so much time to set up basic stuffs like CI, lint, etc.
 
 ## Table of Content
+
 - [Usage](#usage)
 - [Installation](#installation)
   - [Install Poetry](#install-poetry)
@@ -26,6 +26,7 @@ Developer can start writing code without wasting so much time to set up basic st
 ---
 
 ## Usage
+
 We recommand to use GitHub's `Use this template` button to kick off this template.
 But yet, you can set up copy this template by cloning or downloading this repository.
 
@@ -38,15 +39,18 @@ Subsequent Installation step might be helpful.
 ## Installation
 
 ### Install Poetry
+
 Please read this [installation guide](https://python-poetry.org/docs/) to install poetry.
 
 Then install package dependencies with this command at project root.
 This will resolve package dependencies and install it in poetry managed virtual environment.
+
 ```
-$ poetry install
+poetry install
 ```
 
 ### (Optional) Install Pyenv
+>
 > pyenv lets you easily switch between multiple versions of Python.
 It's simple, unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing well.
 
@@ -55,6 +59,7 @@ As quoted [pyenv readme](https://github.com/pyenv/pyenv/blob/master/README.md) d
 ### Configuration
 
 #### pyproject.toml
+
 This file contains build system requirements and information, which are used by poetry to build the package.
 We tried to gather every package related settings as much as possible here.
 Through this design decision, project could remove package dependant configuration files like `.isort.cfg`, `pytest.ini`, etc.
@@ -68,6 +73,7 @@ Through this design decision, project could remove package dependant configurati
 Except **[build-system]**, We suggest you to update every settings above.
 
 #### .github/workflows/ci.yml
+
 We choose GitHub action as Continuous Integration tool. It contains package-build, unittest, and lint job.
 Each job works concurrently on different virtual machines.
 
@@ -78,6 +84,7 @@ Each job works concurrently on different virtual machines.
 Change `python-version` value in this file according to package compatible python versions which configured at `pyproject.toml`.
 
 #### tox.ini
+
 Tox runs test against packages which built in isolated virtual environment.
 
 - **[tox]**: Tox global settings.
@@ -87,9 +94,11 @@ Tox runs test against packages which built in isolated virtual environment.
 According to package's python compatible versions, **[tox.envlist]** and **[gh-actions]** should be defined.
 
 #### Source code
+
 Make your own named package in src directory.
 
 **NOTE**: package setting in `pyproject.toml` should be changed as you set up your own package.
+
 ```
 packages = [
     { include = "{your-python-package-name}", from = "src" },
@@ -97,9 +106,11 @@ packages = [
 ```
 
 #### Test Code
+
 Every test code should resides in `tests` package at project root.
 
 To test your source code, simply use 'pytest' or 'tox'.
+
 ```
 # Use pytest
 $ pytest tests/
@@ -111,9 +122,11 @@ $ tox
 ---
 
 ## Architecture
+
 Detailed explanation about stacks used in this template is covered in this section.
 
 ### Project Layout
+
 This template repository follows src layout style. As the name suggests, its distinctive feature is subdirectory named `src`.
 Main python packages lives inside `src` directory.
 
@@ -123,6 +136,7 @@ Src layout helps to achieve this condition. By separating source code from proje
 This layout is better explained in this [blog post by Ionel Cristian Mărieș](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure).
 
 ### Dependency Management & Packaging
+
 We use [Poetry](https://github.com/python-poetry/poetry) to control dependencies and build package.
 Advantages of using poetry is well explained in their [README.md](https://github.com/python-poetry/poetry/blob/master/README.md).
 
@@ -131,9 +145,11 @@ It frees developer from virtual environment management. But also offers option t
 For more information read this [docs](https://python-poetry.org/docs/managing-environments/)
 
 ### Continuous Integration
+
 Our GitHub action consists of two workflows. one for CI, and one for release draft.
 
 `ci.yml` workflow contains three different jobs. Those are package-build, unittest, lint.
+
 - **package-build** job is responsible for build package and test it. so it uses tox and can have multiple python versions.
 - **unittest** job is in charge of test on source code, and report test coverage.
 - **lint** job processes every linting stuffs.
@@ -144,15 +160,18 @@ Release draft template can be modified by editing `.github/release-drafter.yml` 
 It demonstrates how draft should be presented.
 
 ### Testing
+
 [Pytest](https://github.com/pytest-dev/pytest/) is our main test runner.
 
 ### Linting
+
 Code is double-checked during development process. One at commit phase, and the other at CI process.
 
 [pre-commit](https://pre-commit.com/) is help us to check at commit time. By executing installation command `pre-commit install`,
 It automatically adds pre commit hooks. Types of hook are managed using `.pre-commit-config.yaml`.
 
 ### Coverage
+
 Coverage of test functions is one of important metrics which decides code quality.
 `ci.yml` workflow runs unittest and reports coverage report on pull request comment.
 We use [orgoros's github action](https://github.com/orgoro/coverage) as our coverage component of our CI workflow.
@@ -160,6 +179,7 @@ We use [orgoros's github action](https://github.com/orgoro/coverage) as our cove
 ---
 
 ## Contributing
+
 Pull requests are always welcome.
 
 Check CONTRIBUTING.md for more details.
@@ -167,4 +187,5 @@ Check CONTRIBUTING.md for more details.
 ---
 
 ## License
+
 Distributed under the terms of the MIT license.

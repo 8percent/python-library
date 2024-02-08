@@ -45,7 +45,7 @@ Please read this [installation guide](https://python-poetry.org/docs/) to instal
 Then install package dependencies with this command at project root.
 This will resolve package dependencies and install it in poetry managed virtual environment.
 
-```
+```shell
 poetry install
 ```
 
@@ -99,7 +99,7 @@ Make your own named package in src directory.
 
 **NOTE**: package setting in `pyproject.toml` should be changed as you set up your own package.
 
-```
+```toml
 packages = [
     { include = "{your-python-package-name}", from = "src" },
 ]
@@ -111,7 +111,7 @@ Every test code should resides in `tests` package at project root.
 
 To test your source code, simply use 'pytest' or 'tox'.
 
-```
+```shell
 # Use pytest
 $ pytest tests/
 

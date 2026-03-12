@@ -1,7 +1,7 @@
 # Python Library
 
 ![Build](https://github.com/8percent/python-library/actions/workflows/ci.yml/badge.svg)
-[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/8percent/python-library/master.svg)](https://results.pre-commit.ci/latest/github/8percent/python-library/master)
 
@@ -13,7 +13,7 @@ Developer can start writing code without wasting so much time to set up basic st
 
 - [Usage](#usage)
 - [Installation](#installation)
-  - [Install Poetry](#install-poetry)
+  - [Install uv](#install-uv)
   - [Configuration](#configuration)
 - [Architecture](#architecture)
   - [Project Layout](#project-layout)
@@ -31,22 +31,22 @@ We recommand to use GitHub's `Use this template` button to kick off this templat
 But yet, you can set up copy this template by cloning or downloading this repository.
 
 Once you prepared this repository on your local machine, remaining part is project configuration.
-Unless you are familiar with stacks(poetry, tox, GitHub action, etc.),
+Unless you are familiar with stacks(uv, tox, GitHub action, etc.),
 Subsequent Installation step might be helpful.
 
 ---
 
 ## Installation
 
-### Install Poetry
+### Install uv
 
-Please read this [installation guide](https://python-poetry.org/docs/) to install poetry.
+Please read this [installation guide](https://docs.astral.sh/uv/getting-started/installation/) to install uv.
 
 Then install package dependencies with this command at project root.
-This will resolve package dependencies and install it in poetry managed virtual environment.
+This will resolve package dependencies and install it in uv managed virtual environment.
 
 ```shell
-poetry install
+uv sync --group dev
 ```
 
 ### (Optional) Install Pyenv
@@ -60,14 +60,14 @@ As quoted [pyenv readme](https://github.com/pyenv/pyenv/blob/master/README.md) d
 
 #### pyproject.toml
 
-This file contains build system requirements and information, which are used by poetry to build the package.
+This file contains build system requirements and information, which are used by hatchling to build the package.
 We tried to gather every package related settings as much as possible here.
-Through this design decision, project could remove package dependant configuration files like `.isort.cfg`, `pytest.ini`, etc.
+Through this design decision, project could remove package dependant configuration files like `pytest.ini`, etc.
 
-- **[tool.poetry]**: Describe package's metadata. Including package name, versions, dscription, authors etc.
-- **[tool.poetry.dependencies]**, **[tool.poetry.dev-dependencies]**: Manage package's dependencies. Poetry will check this section to resolve requirements version.
-- **[build-system]**: Define how to build package. Generally no need to edit this section.
-- **[tool.isort]**, **[tool.black]**: By Editing this part, you can set how linting library should work.
+- **[project]**: Describe package's metadata following PEP 621. Including package name, versions, description, authors etc.
+- **[dependency-groups]**: Manage dev dependencies following PEP 735.
+- **[build-system]**: Define how to build package using hatchling. Generally no need to edit this section.
+- **[tool.ruff]**: Linting and formatting configuration using ruff.
 - **[tool.pytest.ini_options]**: pytest configuration.
 
 Except **[build-system]**, We suggest you to update every settings above.
@@ -79,19 +79,19 @@ Each job works concurrently on different virtual machines.
 
 - **package-build**: Use tox to test package against multiple python versions.
 - **unittest**: Test code and report coverage using pytest.
-- **lint**: Lint code using flake, isort, black.
+- **lint**: Lint and format code using ruff.
 
 Change `python-version` value in this file according to package compatible python versions which configured at `pyproject.toml`.
 
 #### tox.ini
 
 Tox runs test against packages which built in isolated virtual environment.
+Uses `tox-uv` plugin for uv integration.
 
-- **[tox]**: Tox global settings.
-- **[gh-actions]**: Mapping between GitHub action python-version matrix and tox virtual environment.
+- **[tox]**: Tox global settings including uv-venv-lock-runner.
 - **[testenv]**: Test environment setting.
 
-According to package's python compatible versions, **[tox.envlist]** and **[gh-actions]** should be defined.
+According to package's python compatible versions, **[tox.envlist]** should be defined.
 
 #### Source code
 
@@ -100,9 +100,8 @@ Make your own named package in src directory.
 **NOTE**: package setting in `pyproject.toml` should be changed as you set up your own package.
 
 ```toml
-packages = [
-    { include = "{your-python-package-name}", from = "src" },
-]
+[tool.hatch.build.targets.wheel]
+packages = ["src/{your-python-package-name}"]
 ```
 
 #### Test Code
@@ -113,10 +112,10 @@ To test your source code, simply use 'pytest' or 'tox'.
 
 ```shell
 # Use pytest
-$ pytest tests/
+$ uv run pytest tests/
 
 # Use Tox
-$ tox
+$ uv run tox
 ```
 
 ---
@@ -137,12 +136,12 @@ This layout is better explained in this [blog post by Ionel Cristian Mărieș](h
 
 ### Dependency Management & Packaging
 
-We use [Poetry](https://github.com/python-poetry/poetry) to control dependencies and build package.
-Advantages of using poetry is well explained in their [README.md](https://github.com/python-poetry/poetry/blob/master/README.md).
+We use [uv](https://github.com/astral-sh/uv) to control dependencies and build package.
+uv is an extremely fast Python package and project manager, written in Rust.
 
-By default, Poetry automatically manages virtual environment for each project and python version.
-It frees developer from virtual environment management. But also offers option to manage virtual environment manually.
-For more information read this [docs](https://python-poetry.org/docs/managing-environments/)
+By default, uv automatically manages virtual environment for each project.
+It frees developer from virtual environment management.
+For more information read the [docs](https://docs.astral.sh/uv/).
 
 ### Continuous Integration
 

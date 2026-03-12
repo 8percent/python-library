@@ -201,6 +201,11 @@ ipython_config.py
 #   https://pdm.fming.dev/#use-with-ide
 .pdm.toml
 
+# uv
+#   Similar to poetry.lock, it is generally recommended to include uv.lock in version control.
+#   https://docs.astral.sh/uv/concepts/projects/layout/#the-lockfile
+#uv.lock
+
 # PEP 582; used by e.g. github.com/David-OConnor/pyflow and github.com/pdm-project/pdm
 __pypackages__/
 

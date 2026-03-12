@@ -7,52 +7,36 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.12", "3.13"]
 
     steps:
       - name: Checkout Project Package
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ matrix.python-version }}
+      - name: Install uv
+        uses: astral-sh/setup-uv@v5
 
-      - name: Install Poetry
-        uses: snok/install-poetry@v1
-
-      - name: Install tox
-        run: pip install tox tox-gh-actions
+      - name: Install Python
+        run: uv python install ${{ matrix.python-version }}
 
       - name: Test
-        run: poetry run tox
+        run: uv run tox -e py$(echo ${{ matrix.python-version }} | tr -d '.')
 
   unittest:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.11"]
 
     steps:
     - name: Checkout Project Package
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
 
     - name: Install Dependencies
-      run: poetry install --no-root -v
-
-    - name: Set Python Path
-      run: echo "PYTHONPATH=src" >> $GITHUB_ENV
+      run: uv sync --group dev
 
     - name: Test
-      run: poetry run pytest tests/ --cov=src/ --cov-report xml:coverage.xml
+      run: uv run pytest tests/ --cov=src/ --cov-report xml:coverage.xml
 
     - name: Report Coverage
       uses: orgoro/coverage@v3.1
@@ -62,29 +46,19 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.11"]
+
     steps:
     - name: Checkout Project Package
-      uses: actions/checkout@v3
+      uses: actions/checkout@v4
 
-    - name: Setup Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
+    - name: Install uv
+      uses: astral-sh/setup-uv@v5
 
-    - name: Install Poetry
-      uses: snok/install-poetry@v1
+    - name: Install Dependencies
+      run: uv sync --group dev
 
-    - name: Install Python Dependencies
-      run: poetry install  --no-root -v
+    - name: Ruff Check
+      run: uv run ruff check src/ tests/
 
-    - name: Flake8
-      run: poetry run flake8 src/ tests/
-
-    - name: Isort
-      run: poetry run isort -c src/ tests/
-
-    - name: Black
-      run: poetry run black --check src/ tests/
+    - name: Ruff Format Check
+      run: uv run ruff format --check src/ tests/

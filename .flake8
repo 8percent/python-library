@@ -1,5 +1,0 @@
-[flake8]
-extend-ignore =
-    # E203: Whitespace before ':' (pycqa/pycodestyle#373)
-    E203,
-max-line-length = 88
